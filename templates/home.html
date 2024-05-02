@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>For loop in Flask</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        {% for name in lable %}
+        <th>{{name}}</th>
+        {% endfor %}
+    </tr>
+
+    {% for pokemon in entries %}
+    <tr>
+        {% for value in pokemon%}
+        <td>{{value}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+<!--    {% for a in thing %}-->
+<!--    <tr>-->
+<!--        <td>{{a[0]}}</td>-->
+<!--        <td>{{a[1]}}</td>-->
+<!--    </tr>-->
+<!--    {% endfor %}-->
+</table>
+
+</body>
+</html>
