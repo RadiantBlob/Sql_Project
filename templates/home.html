@@ -2,32 +2,37 @@
 
 <html>
 <head>
-    <title>ALL POKÉMON</title>
-    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<title>ALL POKÉMON</title>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+
+	<script>
+		function changeColor(num) {
+			document.getElementById("my-btn " + num).style.backgroundColor = "cyan";
+		}
+	</script>
 </head>
 <body>
 
 <table>
-    <tr>
-        {% for name in lable %}
-        <th>{{name}}</th>
-        {% endfor %}
-    </tr>
+	<tr>
+		{% for name in lable %}
+		<th>{{name}}</th>
+		{% endfor %}
+	</tr>
 
-    {% for pokemon in entries %}
-    <tr>
-        {% for value in pokemon%}
-        <td>{{value}}</td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
+	{% for pokemon in entries %}
+	<tr>
+		{% for value in pokemon%}
+		<td>{{value}}</td>
+		{% endfor %}
 
-<!--    {% for a in thing %}-->
-<!--    <tr>-->
-<!--        <td>{{a[0]}}</td>-->
-<!--        <td>{{a[1]}}</td>-->
-<!--    </tr>-->
-<!--    {% endfor %}-->
+		<td>
+			<button id = "my-btn {{pokemon[0]}}" onclick="changeColor({{pokemon[0]}})"></button>
+		</td>
+
+	</tr>
+	{% endfor %}
+
 </table>
 
 </body>
