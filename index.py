@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from backend import Pokemon, return_all, return_sql, prepare
+from backend import Pokemon, return_sql
 
 app = Flask(__name__)
 
@@ -7,7 +7,8 @@ app = Flask(__name__)
 def index():
 	return render_template("home.html",
 	                       lable=vars(Pokemon.from_db(1)).keys(),
-	                       entries=[list(vars(pokemon).values()) for pokemon in return_sql('Select * from pokemon where "type1" = "fire"')])
+	                       entries=[list(vars(pokemon).values()) for pokemon in
+	                                return_sql('Select * from pokemon where "type1" = "fire"')])
 
 if __name__ == '__main__':
 	# print(vars(Pokemon.from_db(1)).keys())
