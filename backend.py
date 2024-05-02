@@ -45,7 +45,7 @@ class Pokemon:
 	def __repr__(self) -> str:
 		return f"{self.id}: {self.name}"
 
-def filter_pokemon(key: str, value: str|int, order="asc"):
+def filter_pokemon(key: str, value: str | int, order="asc"):
 	con = sqlite3.connect("poke.db")
 	cursor = con.cursor()
 	sql = f'Select * from pokemon where "{key}" = "{value}" order by "pokedex_number" {order}'
@@ -54,8 +54,17 @@ def filter_pokemon(key: str, value: str|int, order="asc"):
 	con.close()
 	return [Pokemon(*entry) for entry in row]
 
-print(filter_pokemon("is_legendary", "1", order="desc"))
-# Test case
-# l = Pokemon(1000, "IDK", "a", "a", 1, ['a'], 1, 1, 1, 1, "a", 1, 1, 1)
-# l.to_db()
+def return_all():
+	con = sqlite3.connect("poke.db")
+	cursor = con.cursor()
+	sql = f'Select * from pokemon'
+	cursor.execute(sql)
+	row = cursor.fetchall()
+	con.close()
+	return [Pokemon(*entry) for entry in row]
 
+if __name__ == '__main__':
+	print(filter_pokemon("is_legendary", "1", order="desc"))
+	# Test case
+	# l = Pokemon(1000, "IDK", "a", "a", 1, ['a'], 1, 1, 1, 1, "a", 1, 1, 1)
+	# l.to_db()
