@@ -1,0 +1,7 @@
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+table {
+    width: 100%;
+}
