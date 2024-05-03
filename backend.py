@@ -47,22 +47,24 @@ class Pokemon:
 		return f"{self.id}: {self.name}"
 
 def return_filter(key: str, value: str | int, order="asc") -> [Pokemon]:
-	con = sqlite3.connect("poke.db")
-	cursor = con.cursor()
-	sql = f'Select * from pokemon where "{key}" = "{value}" order by "pokedex_number" {order}'
-	cursor.execute(sql)
-	row = cursor.fetchall()
-	con.close()
-	return [Pokemon(*entry) for entry in row]
+	return return_sql(f'Select * from pokemon where "{key}" = "{value}" order by "pokedex_number" {order}')
+	# con = sqlite3.connect("poke.db")
+	# cursor = con.cursor()
+	# sql = f'Select * from pokemon where "{key}" = "{value}" order by "pokedex_number" {order}'
+	# cursor.execute(sql)
+	# row = cursor.fetchall()
+	# con.close()
+	# return [Pokemon(*entry) for entry in row]
 
 def return_all() -> [Pokemon]:
-	con = sqlite3.connect("poke.db")
-	cursor = con.cursor()
-	sql = f'Select * from pokemon'
-	cursor.execute(sql)
-	row = cursor.fetchall()
-	con.close()
-	return [Pokemon(*entry) for entry in row]
+	return return_sql(f'Select * from pokemon')
+	# con = sqlite3.connect("poke.db")
+	# cursor = con.cursor()
+	# sql = f'Select * from pokemon'
+	# cursor.execute(sql)
+	# row = cursor.fetchall()
+	# con.close()
+	# return [Pokemon(*entry) for entry in row]
 
 def return_sql(sql:str) -> [Pokemon]:
 	con = sqlite3.connect("poke.db")
