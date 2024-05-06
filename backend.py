@@ -1,6 +1,9 @@
 import sqlite3
 from typing import Any
 
+# SELECT username, name from User_hat_Pokemon JOIN User on user = username
+# JOIN Pokemon on pokemon = pokedex_number
+
 class Pokemon:
 	def __init__(
 			self, id: int, name: str, type1: str, type2: str, gen: int, abilities: str, hp: int, speed: int,
@@ -24,7 +27,7 @@ class Pokemon:
 	def from_db(cls, index: int):
 		con = sqlite3.connect("poke.db")
 		cursor = con.cursor()
-		sql = f"Select * from pokemon where pokedex_number = {index}"
+		sql = f"Select * from Pokemon where pokedex_number = {index}"
 		cursor.execute(sql)
 		row = cursor.fetchone()
 		con.close()
@@ -34,7 +37,7 @@ class Pokemon:
 		connection = sqlite3.connect("poke.db")  # Muss vorher angelegt werden.
 		cursor = connection.cursor()
 		sql = (
-			f'INSERT INTO pokemon(pokedex_number, name, type1, type2, generation, abilities, hp, speed, attack, defense, classfication, height_m, weight_kg, is_legendary) VALUES '
+			f'INSERT INTO Pokemon(pokedex_number, name, type1, type2, generation, abilities, hp, speed, attack, defense, classfication, height_m, weight_kg, is_legendary) VALUES '
 			f'("{self.id}", "{self.name}", "{self.type1}", "{self.type2}", "{self.generation}", "{self.abilities}", "{self.hp}", "{self.speed}", "{self.attack}", "{self.defense}", "{self.classification}", "{self.height}", "{self.weight}", "{self.is_legendary}")')
 		cursor.execute(sql)
 		connection.commit()
