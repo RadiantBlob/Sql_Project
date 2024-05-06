@@ -21,15 +21,15 @@
 	</tr>
 
 	{% for pokemon in entries %}
+
 	<tr>
 		{% for value in pokemon%}
 		<td>{{value}}</td>
 		{% endfor %}
 
 		<td>
-			<button id = "my-btn {{pokemon[0]}}" onclick="changeColor({{pokemon[0]}})"></button>
+			<button id="my-btn {{pokemon[0]}}" onclick="changeColor({{pokemon[0]}})"></button>
 		</td>
-
 	</tr>
 	{% endfor %}
 

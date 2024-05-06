@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>{{p.name}}</title>
+<!--	<link rel="stylesheet" type="text/css" href="static/css/main.css">-->
+</head>
+<body>
+<img src="{{url_for('static', filename=('/sprites/{}.png').format(p.id))}}">
+<h1>{{p.name}}</h1>
+</body>
+</html>
