@@ -4,9 +4,11 @@
 <head>
 	<title>{{p.name}}</title>
 <!--	<link rel="stylesheet" type="text/css" href="static/css/main.css">-->
+	<style>
+	</style>
 </head>
 <body>
-<img src="{{url_for('static', filename=('/sprites/{}.png').format(p.id))}}">
+<img src="{{url_for('static', filename=('/sprites/{}.png').format(p.id))}}" style="height:600px">
 <h1>{{p.name}}</h1>
 </body>
 </html>
