@@ -3,12 +3,33 @@
 <html>
 <head>
 	<title>{{p.name}}</title>
-<!--	<link rel="stylesheet" type="text/css" href="static/css/main.css">-->
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 	<style>
+		div.nav {
+			display: table;
+			width: 100%;
+			table-layout: fixed;
+		}
+		div.nav a {
+			display: table-cell;
+			text-align: center;
+		}
+
+		a {
+			color: black;
+			background-color: transparent;
+			text-decoration: underline;
+		}
 	</style>
 </head>
 <body>
 <img src="{{url_for('static', filename=('/sprites/{}.png').format(p.id))}}" style="height:600px">
 <h1>{{p.name}}</h1>
+
+<div class="nav">
+	<a href="/pokemon/{{p.id - 1 if p.id > 1 else 1}}" class="hide">back</a>
+	<a href="/" class="hide">home</a>
+	<a href="/pokemon/{{p.id + 1 if p.id < 800 else 800}}" class="hide">forward</a>
+</div>
 </body>
 </html>
