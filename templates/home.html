@@ -5,11 +5,18 @@
 	<title>ALL POKÉMON</title>
 	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 
-	<script>
-		function changeColor(num) {
-			document.getElementById("my-btn " + num).style.backgroundColor = "cyan";
+	<!--	<script>-->
+	<!--		function changeColor(num) {-->
+	<!--			document.getElementById("my-btn " + num).style.backgroundColor = "cyan";-->
+	<!--		}-->
+	<!--	</script>-->
+	<style>
+		a {
+		  color: black;
+		  background-color: transparent;
+		  text-decoration: underline;
 		}
-	</script>
+	</style>
 </head>
 <body>
 
@@ -24,12 +31,21 @@
 
 	<tr>
 		{% for value in pokemon%}
-		<td>{{value}}</td>
+		<td>
+			{% if value == pokemon[1] %}
+			<a href="/pokemon/{{pokemon[0]}}" style="">
+				{{value}}
+			</a>
+			{% else %}
+			{{value}}
+			{% endif %}
+
+		</td>
 		{% endfor %}
 
-		<td>
-			<button id="my-btn {{pokemon[0]}}" onclick="changeColor({{pokemon[0]}})"></button>
-		</td>
+		<!--		<td>-->
+		<!--			<button id="my-btn {{pokemon[0]}}" onclick="changeColor({{pokemon[0]}})"></button>-->
+		<!--		</td>-->
 	</tr>
 	{% endfor %}
 
