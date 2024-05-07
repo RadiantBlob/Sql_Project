@@ -1,11 +1,11 @@
 from flask import Flask, render_template, url_for
-
 from backend import Pokemon, return_all
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
+
 	return render_template("home.html",
 	                       lable=vars(Pokemon.from_db(1)).keys(),
 	                       entries=[list(vars(pokemon).values()) for pokemon in
@@ -17,8 +17,4 @@ def show_pokemon(id: int):
 
 
 if __name__ == '__main__':
-	# print(vars(Pokemon.from_db(1)).keys())
-
 	app.run()
-
-url_for('static', filename=f'/sprites/{p.id}.png')
