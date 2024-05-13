@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for
 from backend import Pokemon, return_all
+from user import User
 
 app = Flask(__name__)
 
@@ -14,6 +15,13 @@ def index():
 def show_pokemon(id: int):
 	return render_template("poke-page.html", p=Pokemon.from_db(id))
 
+@app.route("/add/<int:id>")
+def add(id: int):
+	return show_pokemon(id)
+
+@app.route("/u/<string:username>")
+def user(username: str):
+	return str(User.from_db(username))
 
 if __name__ == '__main__':
 	app.run()
