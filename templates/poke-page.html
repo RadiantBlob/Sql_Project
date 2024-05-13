@@ -5,23 +5,6 @@
 	<title>{{p.name}}</title>
 	<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='pika_s.png')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='/css/main.css')}}">
-	<style>
-		div.nav {
-			display: table;
-			width: 100%;
-			table-layout: fixed;
-		}
-		div.nav a {
-			display: table-cell;
-			text-align: center;
-		}
-
-		a {
-			color: black;
-			background-color: transparent;
-			text-decoration: underline;
-		}
-	</style>
 </head>
 <body>
 <img src="{{url_for('static', filename=('/sprites/{}.png').format(p.id))}}" style="height:600px">

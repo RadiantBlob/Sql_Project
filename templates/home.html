@@ -11,17 +11,10 @@
 	<!--			document.getElementById("my-btn " + num).style.backgroundColor = "cyan";-->
 	<!--		}-->
 	<!--	</script>-->
-	<style>
-		a {
-			color: black;
-			background-color: transparent;
-			text-decoration: underline;
-		}
-	</style>
 </head>
 <body>
 
-<table>
+<table cellspacing="0">
 	<tr>
 		{% for name in lable %}
 		<th>{{name}}</th>
@@ -30,9 +23,9 @@
 
 	{% for pokemon in entries %}
 
-	<tr class="{{pokemon[4]}}">
+	<tr class="gen{{pokemon[4]}}">
 		{% for value in pokemon%}
-		<td class="{{pokemon[4]}}">
+		<td class="gen{{pokemon[4]}}">
 			{% if value == pokemon[1] %}
 			<a href="/pokemon/{{pokemon[0]}}" style="">
 				{{value}}
