@@ -1,4 +1,5 @@
 import sqlite3
+from util.utilities import read_one, read_all, write_all
 from typing import Any
 
 # SELECT username, name from User_hat_Pokemon JOIN User on user = username
@@ -31,23 +32,14 @@ class Pokemon:
 
 	@classmethod
 	def from_db(cls, index: int):
-		con = sqlite3.connect("poke.db")
-		cursor = con.cursor()
-		sql = f"Select * from Pokemon where pokedex_number = {index}"
-		cursor.execute(sql)
-		row = cursor.fetchone()
-		con.close()
+		row = read_one("poke.db", f"Select * from Pokemon where pokedex_number = {index}")
 		return cls(*row)
 
 	def to_db(self):
-		connection = sqlite3.connect("poke.db")  # Muss vorher angelegt werden.
-		cursor = connection.cursor()
 		sql = (
 			f'INSERT INTO Pokemon(pokedex_number, name, type1, type2, generation, abilities, hp, speed, attack, defense, classfication, height_m, weight_kg, is_legendary) VALUES '
 			f'("{self.id}", "{self.name}", "{self.type1}", "{self.type2}", "{self.generation}", "{self.abilities}", "{self.hp}", "{self.speed}", "{self.attack}", "{self.defense}", "{self.classification}", "{self.height}", "{self.weight}", "{self.is_legendary}")')
-		cursor.execute(sql)
-		connection.commit()
-		connection.close()
+		write_all("poke.db", sql)
 
 	def set_filter(self, fltr: str):
 		if not len(fltr) == 15:
@@ -64,14 +56,10 @@ class Pokemon:
 		return " ".join([str(a) for index, a in enumerate(vars(self).values()) if self.filter_p[index]])
 
 	def __repr__(self) -> str:
-		return " ".join([a for index, a in enumerate(vars(self).values()) if self.filter_p[index]])
+		return " ".join([str(a) for index, a in enumerate(vars(self).values()) if self.filter_p[index]])
 
 def return_sql(sql: str, f="111111111111110") -> [Pokemon]:
-	con = sqlite3.connect("poke.db")
-	cursor = con.cursor()
-	cursor.execute(sql)
-	row = cursor.fetchall()
-	con.close()
+	row = read_all("poke.db", sql)
 
 	pokemon_list = [Pokemon(*entry, filter_p=[True for a in range(14)]) for entry in row]
 	for p in pokemon_list:
