@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-	pokemon_list = return_all(f="111111111111110")
+	pokemon_list = return_all(f="111110111111110")
 	return render_template("home.html",
 	                       lable=pokemon_list[0].get_keys(),
 	                       entries=[pokemon.get_values() for pokemon in pokemon_list])
