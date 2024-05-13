@@ -1,7 +1,7 @@
 import requests
 import sqlite3
 
-con = sqlite3.connect("poke.db")
+con = sqlite3.connect("../poke.db")
 cursor = con.cursor()
 sql = f"Select pokedex_number, name from Pokemon order by pokedex_number asc"
 cursor.execute(sql)
