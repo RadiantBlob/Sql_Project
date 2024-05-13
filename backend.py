@@ -7,7 +7,7 @@ from typing import Any
 class Pokemon:
 	def __init__(
 			self, id: int, name: str, type1: str, type2: str, gen: int, abilities: str, hp: int, speed: int,
-			attack: int, defense: int, classification: str, height: int, weight: int, is_leg: bool):
+			attack: int, defense: int, classification: str, height: int, weight: int, is_leg: bool|int, filter_p=None):
 		self.id: int = id
 		self.name: str = name
 		self.type1: str = type1
@@ -22,6 +22,12 @@ class Pokemon:
 		self.height: int = height
 		self.weight: int = weight
 		self.is_legendary: bool = is_leg
+		if filter_p is None:
+			self.filter_p =  [True for a in range(len(vars(self)))]
+			self.filter_p.append(False)
+		else:
+			self.filter_p = filter_p
+
 
 	@classmethod
 	def from_db(cls, index: int):
@@ -43,11 +49,19 @@ class Pokemon:
 		connection.commit()
 		connection.close()
 
+	def set_filter(self, fltr: str):
+		if not len(fltr) == 15:
+			raise IndexError("fltr has to be 15 chars long")
+		self.filter_p = [(False, True)[int(a)] for a in list(fltr)]
+
+	def get_filtered(self) -> [int|str|bool|list]:
+		return [str(a) for index, a in enumerate(vars(self).values()) if self.filter_p[index]]
+
 	def __str__(self) -> str:
-		return f"{self.id}: {self.name}"
+		return " ".join([str(a) for index, a in enumerate(vars(self).values()) if self.filter_p[index]])
 
 	def __repr__(self) -> str:
-		return f"{self.id}: {self.name}"
+		return " ".join([a for index, a in enumerate(vars(self).values()) if self.filter_p[index]])
 
 def return_sql(sql:str) -> [Pokemon]:
 	con = sqlite3.connect("poke.db")
@@ -64,10 +78,14 @@ def return_all() -> [Pokemon]:
 	return return_sql(f'Select * from Pokemon')
 
 
-
-
 if __name__ == '__main__':
-	print(return_filter("name", "Bulbasaur"))
+	# print(return_filter("name", "Bulbasaur"))
 	# Test case
-	# l = Pokemon(1000, "IDK", "a", "a", 1, ['a'], 1, 1, 1, 1, "a", 1, 1, 1)
+	l = Pokemon(1000, "ID", "TR", "TR", 1234, [''], 1234, 1234, 1234, 1234, "TR", 1234, 1234, 1)
+	l = Pokemon.from_db(1)
+	l.set_filter("111100000000000")
+	# print(l.filter_p)
+	# print(list(vars(l).values()))
+	print(str(l))
+	print(l.get_filtered())
 	# l.to_db()
