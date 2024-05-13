@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>ALL POKÉMON</title>
+	<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='pika_s.png')}}">
 	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 
 	<!--	<script>-->
@@ -29,9 +30,9 @@
 
 	{% for pokemon in entries %}
 
-	<tr>
+	<tr class="{{pokemon[4]}}">
 		{% for value in pokemon%}
-		<td>
+		<td class="{{pokemon[4]}}">
 			{% if value == pokemon[1] %}
 			<a href="/pokemon/{{pokemon[0]}}" style="">
 				{{value}}
