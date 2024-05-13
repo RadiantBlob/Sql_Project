@@ -54,8 +54,11 @@ class Pokemon:
 			raise IndexError("fltr has to be 15 chars long")
 		self.filter_p = [(False, True)[int(a)] for a in list(fltr)]
 
-	def get_filtered(self) -> [int|str|bool|list]:
+	def get_values(self) -> [int|str|bool|list]:
 		return [str(a) for index, a in enumerate(vars(self).values()) if self.filter_p[index]]
+
+	def get_keys(self) -> [str]:
+		return [str(a) for index, a in enumerate(vars(self).keys()) if self.filter_p[index]]
 
 	def __str__(self) -> str:
 		return " ".join([str(a) for index, a in enumerate(vars(self).values()) if self.filter_p[index]])
@@ -63,29 +66,33 @@ class Pokemon:
 	def __repr__(self) -> str:
 		return " ".join([a for index, a in enumerate(vars(self).values()) if self.filter_p[index]])
 
-def return_sql(sql:str) -> [Pokemon]:
+def return_sql(sql: str, f="111111111111110") -> [Pokemon]:
 	con = sqlite3.connect("poke.db")
 	cursor = con.cursor()
 	cursor.execute(sql)
 	row = cursor.fetchall()
 	con.close()
-	return [Pokemon(*entry) for entry in row]
 
-def return_filter(key: str, value: str | int, order="asc") -> [Pokemon]:
-	return return_sql(f'Select * from Pokemon where "{key}" = "{value}" order by "pokedex_number" {order}')
+	pokemon_list = [Pokemon(*entry, filter_p=[True for a in range(14)]) for entry in row]
+	for p in pokemon_list:
+		p.set_filter(f)
+	return pokemon_list
 
-def return_all() -> [Pokemon]:
-	return return_sql(f'Select * from Pokemon')
+def return_filter(key: str, value: str | int, order="asc", f="111111111111110") -> [Pokemon]:
+	return return_sql(f'Select * from Pokemon where "{key}" = "{value}" order by "pokedex_number" {order}', f)
 
+def return_all(f="111111111111110") -> [Pokemon]:
+	return return_sql(f'Select * from Pokemon', f)
 
 if __name__ == '__main__':
-	# print(return_filter("name", "Bulbasaur"))
+	pass
 	# Test case
-	l = Pokemon(1000, "ID", "TR", "TR", 1234, [''], 1234, 1234, 1234, 1234, "TR", 1234, 1234, 1)
-	l = Pokemon.from_db(1)
-	l.set_filter("111100000000000")
+	# l = Pokemon(1000, "ID", "TR", "TR", 1234, [''], 1234, 1234, 1234, 1234, "TR", 1234, 1234, 1)
+	# l = Pokemon.from_db(1)
+	# l.set_filter("111100000000000")
 	# print(l.filter_p)
 	# print(list(vars(l).values()))
-	print(str(l))
-	print(l.get_filtered())
+	# print(str(l))
+	# print(l.get_keys())
+	# print(l.get_values())
 	# l.to_db()
