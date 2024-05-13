@@ -1,13 +1,71 @@
-tr:nth-child(even) {
-    background-color: #D6EEEE;
-}
-
-button {
-    width: 40px;
-    height: 20px;
-    background: #00ef44
-}
-
 table {
-    width: 100%;
+	border-collaps: collaps;
+	position: relative;
+	width: 100%;
+	font-size: 24px;
+}
+
+th, td {
+	padding: 6px;
+	text-align: left;
+	border-bottom: 1px solid #DDD;
+}
+
+th {
+	background: white;
+	position: sticky;
+	top: 0;
+}
+
+tr:nth-child(even) {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+tr:hover {
+	background: white;
+}
+
+div.nav {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+div.nav a {
+	display: table-cell;
+	text-align: center;
+}
+
+a {
+	color: black;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+.gen1 {
+	background-color: hsla(calc(0 * 255/7), 100%, 50%, 0.2)
+}
+
+.gen2 {
+	background-color: hsla(calc(1 * 255/7), 100%, 50%, 0.2)
+}
+
+.gen3 {
+	background-color: hsla(calc(2 * 255/7), 100%, 50%, 0.2)
+}
+
+.gen4 {
+	background-color: hsla(calc(3 * 255/7), 100%, 50%, 0.2)
+}
+
+.gen5 {
+	background-color: hsla(calc(4 * 255/7), 100%, 50%, 0.2)
+}
+
+.gen6 {
+	background-color: hsla(calc(5 * 255/7), 100%, 50%, 0.2)
+}
+
+.gen7 {
+	background-color: hsla(calc(6 * 255/7), 100%, 50%, 0.2)
 }
