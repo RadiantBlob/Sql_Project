@@ -33,10 +33,34 @@ class User:
 		# for p in self.inventory:
 		# 	p.set_filter("010000000000000")
 
+	def write_pokemon(self, id: int, level: int=1):
+		self.inventory.append((Pokemon.from_db(id), level))
+		sql = f"Insert into User_hat_Pokemon (user, pokemon, level) values ('{self.username}', '{id}', '{level}')"
+		write_all("poke.db", sql)
+
+	def delete_pokemon(self, id: int, level: int):
+		sql = f"Select id from User_hat_Pokemon where user = '{self.username}' and pokemon = '{id}' and level = '{level}'"
+		p = read_one("poke.db", sql)
+		if p is None:
+			return
+
+		sql = f"DELETE FROM User_hat_Pokemon WHERE id = '{p[0]}'"
+		con = sqlite3.connect("poke.db")
+		cursor = con.cursor()
+		cursor.execute(sql)
+		con.commit()
+		con.close()
+		self.inventory = []
+		self.load_pokemon()
+
 	def __str__(self):
 		return f"{self.username}"
 
 if __name__ == '__main__':
 	admin = User.from_db("admin")
 	admin.load_pokemon()
+	# print(admin.inventory)
+	# admin.write_pokemon(135)
+	# print(admin.inventory)
+	admin.delete_pokemon(135, 1)
 	print(admin.inventory)
