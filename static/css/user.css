@@ -1,0 +1,16 @@
+#inventory {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+img {
+	height: 200px;
+}
+
+a {
+	color: black;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
