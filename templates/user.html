@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>{{user.username}}</title>
+</head>
+<body>
+<h1>{{user.username}}</h1>
+<div id="inventory">
+	{% for pokemon, level in user.inventory}
+	<a href="/pokemon/{{pokemon.id}}">
+		<img src="{{url_for('static', filename=('sprites/{}.png').format(pokemon.id)}}">
+		<p>{{pokemon.name}}</p>
+		<p>level: {{level}}</p>
+	</a>
+	{% endfor %}
+</div>
+
+</body>
+</html>
