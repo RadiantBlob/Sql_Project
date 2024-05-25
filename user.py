@@ -7,10 +7,11 @@ from util.utilities import read_one, read_all, write_all
 
 class User:
 	def __init__(self, username: str, password: str):
-		self.inventory: [Pokemon] = []
+		self.inventory: [(Pokemon, int)] = []
 		self.username: str = username
 		self._password: str = password
 		self.p_list: [Pokemon] = []
+		self.load_pokemon()
 
 	@classmethod
 	def from_db(cls, un: str):
@@ -58,7 +59,6 @@ class User:
 
 if __name__ == '__main__':
 	admin = User.from_db("admin")
-	admin.load_pokemon()
 	# print(admin.inventory)
 	# admin.write_pokemon(135)
 	# print(admin.inventory)
