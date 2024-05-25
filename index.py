@@ -21,7 +21,10 @@ def add(id: int):
 
 @app.route("/u/<string:username>")
 def user(username: str):
-	return str(User.from_db(username))
+	u = User.from_db(username)
+	if u is None:
+		return "Not a valid username"
+	return render_template("user.html", user=u)
 
 if __name__ == '__main__':
 	app.run()
