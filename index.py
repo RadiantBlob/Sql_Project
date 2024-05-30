@@ -1,4 +1,6 @@
-from flask import Flask, render_template, url_for
+import time
+
+from flask import Flask, render_template, url_for, request, redirect
 from backend import Pokemon, return_all
 from user import User
 
@@ -29,6 +31,20 @@ def user(username: str):
     if u is None:
         return "Not a valid username"
     return render_template("user.html", user=u)
+
+
+@app.route("/u/add", methods=['GET', 'POST'])
+def add_user():
+    if request.method == 'POST':
+        username = request.form.get('Username')
+        password = request.form.get('Password')
+        u = User.from_db(username)
+        if u is None:
+            User.to_db(username, password)
+            return redirect("/u/{username}".format(username=username))
+        else:
+            return "Username is already used"
+    return render_template("add_user.html")
 
 
 if __name__ == '__main__':

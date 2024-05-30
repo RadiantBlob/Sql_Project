@@ -33,7 +33,7 @@ class Pokemon:
 
     @classmethod
     def from_db(cls, index: int):
-        row = read_one("poke.db", f"Select * from Pokemon where pokedex_number = {index}")
+        row = read_one("poke.db", f"SELECT * FROM Pokemon WHERE pokedex_number = {index}")
         return cls(*row)
 
     def to_db(self):

@@ -22,8 +22,9 @@ class User:
             return
         return cls(*row)
 
-    def to_db(self):
-        sql = f"INSERT INTO User(username, password) VALUES ({self.username, self._password}) "
+    @classmethod
+    def to_db(cls, un: str, pw: str):
+        sql = f"INSERT INTO User(username, password) VALUES ('{un}', '{pw}') "
         write_all("poke.db", sql)
 
     def load_pokemon(self):
@@ -90,6 +91,7 @@ class User:
 
 if __name__ == '__main__':
     admin = User.from_db("admin")
+    User.to_db('volmiur', 'test')
     # print(admin.inventory)
     # admin.write_pokemon(135)
     # print(admin.inventory)
