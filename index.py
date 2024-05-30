@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect
 
-import backend
 from backend import Pokemon, return_all, return_filter
 from user import User
 
@@ -11,16 +10,20 @@ app = Flask(__name__)
 def index():
     pokemon_list = return_all(f="111111111111110")
     if request.method == 'POST':
-        search = request.form.get('Search')
-        if search != '':
-            pokemon_list2 = return_filter('pokedex_number', '{search}'.format(search=search))
+        number = request.form.get('Number')
+        fltr = request.form.get('Filter')
+        if fltr == '':
+            fltr = "111111111111110"
+        if number != '':
+            pokemon_list1 = return_filter('pokedex_number', f'{number}', f='{filter}'.format(filter=fltr))
             return render_template("home.html",
-                                   lable=pokemon_list[0].get_keys(),
-                                   entries=[pokemon.get_values() for pokemon in pokemon_list2])
+                                   lable=pokemon_list1[0].get_keys(),
+                                   entries=[pokemon.get_values() for pokemon in pokemon_list1])
         else:
+            pokemon_list2 = return_all(f='{filter}'.format(filter=fltr))
             return render_template("home.html",
-                                   lable=pokemon_list[0].get_keys(),
-                                   entries=[pokemon.get_values() for pokemon in pokemon_list])
+                                   lable=pokemon_list2[0].get_keys(),
+                                   entries=[pokemon.get_values() for pokemon in pokemon_list2])
 
     return render_template("home.html",
                            lable=pokemon_list[0].get_keys(),

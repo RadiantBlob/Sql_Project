@@ -86,7 +86,7 @@ if __name__ == '__main__':
 # l = Pokemon(1000, "ID", "TR", "TR", 1234, [''], 1234, 1234, 1234, 1234, "TR", 1234, 1234, 1)
 # l = Pokemon.from_db(1)
 # l.set_filter("111100000000000")
-#print(return_filter('pokedex_number', 10))
+# print(return_filter('pokedex_number', 10))
 # print(l.filter_p)
 # print(list(vars(l).values()))
 # print(str(l))
