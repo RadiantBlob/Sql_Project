@@ -82,6 +82,11 @@ def return_all(f="111111111111110") -> [Pokemon]:
 
 if __name__ == '__main__':
     pass
+    # row = read_all("poke.db", "select * from User_hat_Pokemon")
+    # for entry in row:
+    #     print(entry)
+    # for user, pokemon_id, level, inteam in row:
+    #     print(user, pokemon_id, level, inteam)
 # Test case
 # l = Pokemon(1000, "ID", "TR", "TR", 1234, [''], 1234, 1234, 1234, 1234, "TR", 1234, 1234, 1)
 # l = Pokemon.from_db(1)

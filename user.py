@@ -41,24 +41,24 @@ class User:
     # for p in self.inventory:
     # 	p.set_filter("010000000000000")
 
-    def write_pokemon(self, id: int, level: int = 1):
-        self.inventory.append([Pokemon.from_db(id), level])
-        sql = f"INSERT INTO User_hat_Pokemon (user, pokemon, level) VALUES ('{self.username}', '{id}', '{level}')"
+    def write_pokemon(self, p_id: int, level: int = 1):
+        self.inventory.append([Pokemon.from_db(p_id), level])
+        sql = f"INSERT INTO User_hat_Pokemon (user, pokemon, level) VALUES ('{self.username}', '{p_id}', '{level}')"
         write_all("poke.db", sql)
 
     def update_database(self):
         for pokemon, level in self.inventory:
-            sql = (f"INSERT INTO User_hat_Pokemon (user, pokemon, level, inteam) VALUES ('{self.username}', '{id}',"
+            sql = (f"INSERT INTO User_hat_Pokemon (user, pokemon, level, inteam) VALUES ('{self.username}', '{pokemon.id}',"
                    f"'{level}', '0')")
             write_all("poke.db", sql)
 
         for pokemon, level in self.team:
-            sql = (f"INSERT INTO User_hat_Pokemon (user, pokemon, level, inteam) VALUES ('{self.username}', '{id}',"
+            sql = (f"INSERT INTO User_hat_Pokemon (user, pokemon, level, inteam) VALUES ('{self.username}', '{pokemon.id}',"
                    f"'{level}', '1')")
             write_all("poke.db", sql)
 
-    def delete_pokemon(self, id: int, level: int):
-        sql = (f"SELECT id FROM User_hat_Pokemon WHERE user = '{self.username}' AND pokemon = '{id}'"
+    def delete_pokemon(self, p_id: int, level: int):
+        sql = (f"SELECT id FROM User_hat_Pokemon WHERE user = '{self.username}' AND pokemon = '{p_id}'"
                f" and level = '{level}'")
         p = read_one("poke.db", sql)
         if p is None:
@@ -91,11 +91,12 @@ class User:
 
 if __name__ == '__main__':
     admin = User.from_db("admin")
-    User.to_db('volmiur', 'test')
+    # User.to_db('volmiur', 'test')
     # print(admin.inventory)
     # admin.write_pokemon(135)
     # print(admin.inventory)
     # admin.delete_pokemon(135, 1)
-    # admin.move_to_team(4, 2)
-    print(admin.inventory)
-    print(admin.team)
+    admin.move_to_inventory(4, 2)
+    admin.update_database()
+    print("inventory = ", admin.inventory)
+    print("team = ",admin.team)
