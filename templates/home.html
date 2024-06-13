@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-	<title>ALL POKÉMON</title>
-	<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='pika_s.png')}}">
-	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<head>
+		<title>ALL POKÉMON</title>
+		<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='pika_s.png')}}">
+		<link rel="stylesheet" type="text/css" href="static/css/main.css">
 
-	<!--	<script>-->
-	<!--		function changeColor(num) {-->
-	<!--			document.getElementById("my-btn " + num).style.backgroundColor = "cyan";-->
-	<!--		}-->
-	<!--	</script>-->
-</head>
-<body>
-<div class="container">
-    <form action="" method="post">
-		<label for="number">Pokedex_number</label>
-		<input type="text" id="number" name="Number" autocomplete="off">
+		<!--	<script>-->
+		<!--		function changeColor(num) {-->
+		<!--			document.getElementById("my-btn " + num).style.backgroundColor = "cyan";-->
+		<!--		}-->
+		<!--	</script>-->
+	</head>
+	<body>
+		<div class="container">
+			<form action="" method="post">
+				<label for="number">Pokedex_number</label>
+				<input type="number" id="number" name="Number" autocomplete="off">
 
-		<label for="filter">Filter</label>
-		<input type="text" id="filter" name="Filter" autocomplete="off" minlength="15" maxlength="15">
+				<label for="filter">Filter</label>
+				<input type="number" id="filter" name="Filter" autocomplete="off" minlength="15" maxlength="15">
 
-		<button id="Button1">Search</button>
-    </form>
-</div>
+				<button id="Button1">Search</button>
+			</form>
+		</div>
 
-<table cellspacing="0">
-	<tr>
-		{% for name in lable %}
-		<th>{{name}}</th>
-		{% endfor %}
-	</tr>
+		<table cellspacing="0">
+		<tr>
+				{% for name in lable %}
+				<th>{{name}}</th>
+				{% endfor %}
+			</tr>
 
-	{% for pokemon in entries %}
+			{% for pokemon in entries %}
 
-	<tr class="gen{{pokemon[4]}}">
-		{% for value in pokemon%}
-		<td class="gen{{pokemon[4]}}">
-			{% if value == pokemon[1] %}
-			<a href="/pokemon/{{pokemon[0]}}" style="">
-				{{value}}
-			</a>
-			{% else %}
-			{{value}}
-			{% endif %}
+			<tr class="gen{{pokemon[4]}}">
+				{% for value in pokemon%}
+				<td class="gen{{pokemon[4]}}">
+					{% if value == pokemon[1] %}
+					<a href="/pokemon/{{pokemon[0]}}" style="">
+						{{value}}
+					</a>
+					{% else %}
+					{{value}}
+					{% endif %}
 
-		</td>
-		{% endfor %}
+				</td>
+				{% endfor %}
 
-		<!--		<td>-->
-		<!--			<button id="my-btn {{pokemon[0]}}" onclick="changeColor({{pokemon[0]}})"></button>-->
-		<!--		</td>-->
-	</tr>
-	{% endfor %}
+				<!--		<td>-->
+				<!--			<button id="my-btn {{pokemon[0]}}" onclick="changeColor({{pokemon[0]}})"></button>-->
+				<!--		</td>-->
+			</tr>
+			{% endfor %}
 
-</table>
+		</table>
 
-</body>
+	</body>
 </html>
