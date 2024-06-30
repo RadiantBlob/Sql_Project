@@ -9,49 +9,23 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def index():
     ftr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+    filter_arguments = ['ID', 'Name', 'type1', 'type2', 'Generation', 'Abilities', 'hp', 'speed',
+                        'attack', 'defense', 'classification', 'height', 'weight', 'legendary']
+
     pokemon_list = return_all(f=ftr)
+
     if request.method == 'POST':
         number = request.form.get('Number')
-        id = request.form.get('ID')
-        name = request.form.get('Name')
-        type1 = request.form.get('type1')
-        type2 = request.form.get('type2')
-        generation = request.form.get('Generation')
-        abilities = request.form.get('Abilities')
-        hp = request.form.get('hp')
-        speed = request.form.get('speed')
-        attack = request.form.get('attack')
-        defense = request.form.get('defense')
-        classification = request.form.get('classification')
-        height = request.form.get('height')
-        weight = request.form.get('weight')
-        legendary = request.form.get('legendary')
 
-        checkbox(id, 0, ftr)
-        checkbox(name, 1, ftr)
-        checkbox(type1, 2, ftr)
-        checkbox(type2, 3, ftr)
-        checkbox(generation, 4, ftr)
-        checkbox(abilities, 5, ftr)
-        checkbox(hp, 6, ftr)
-        checkbox(speed, 7, ftr)
-        checkbox(attack, 8, ftr)
-        checkbox(defense, 9, ftr)
-        checkbox(classification, 10, ftr)
-        checkbox(height, 11, ftr)
-        checkbox(weight, 12, ftr)
-        checkbox(legendary, 13, ftr)
+        filter_arg_values = {arg: request.form.get(arg) for arg in filter_arguments}
+        filter_values = list(filter_arg_values.values())
+        ftr = [0 if val is None else 1 for val in filter_values]
+        ftr.append(0)
 
         if number != '':
-            pokemon_list1 = return_filter('pokedex_number', f'{number}', f=ftr)
-            return render_template("home.html",
-                                   lable=pokemon_list1[0].get_keys(),
-                                   entries=[pokemon.get_values() for pokemon in pokemon_list1])
+            pokemon_list = return_filter('pokedex_number', f'{number}', f=ftr)
         else:
-            pokemon_list2 = return_all(f=ftr)
-            return render_template("home.html",
-                                   lable=pokemon_list2[0].get_keys(),
-                                   entries=[pokemon.get_values() for pokemon in pokemon_list2])
+            pokemon_list = return_all(f=ftr)
 
     return render_template("home.html",
                            lable=pokemon_list[0].get_keys(),
@@ -88,13 +62,6 @@ def add_user():
         else:
             return "Username is already used"
     return render_template("add_user.html")
-
-
-def checkbox(attribute, number, ftr):
-    if attribute:
-        ftr[number] = '1'
-    else:
-        ftr[number] = '0'
 
 
 if __name__ == '__main__':
