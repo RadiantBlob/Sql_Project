@@ -34,17 +34,6 @@ tr:hover {
 	background: white;
 }
 
-div.nav {
-	display: table;
-	width: 100%;
-	table-layout: fixed;
-}
-
-div.nav a {
-	display: table-cell;
-	text-align: center;
-}
-
 a {
 	color: black;
 	background-color: transparent;
@@ -77,20 +66,6 @@ a {
 
 .gen7 {
 	background-color: hsla(calc(6 * 255/7), 100%, 50%, 0.2)
-}
-
-.Pokemon_stats{
-    border: 3px solid #fff;
-    padding: 20px;
-}
-
-.Pokemon_stats_child{
-    width: 45%;
-    float: left;
-    padding: 20px;
-    background-color: lightgreen;
-    font-size: 24px;
-    text-align: center;
 }
 
 .checkbox {

@@ -1,0 +1,30 @@
+div.nav {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+div.nav a {
+	display: table-cell;
+	text-align: center;
+}
+
+a {
+	color: black;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+.Pokemon_stats{
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+.Pokemon_stats_child{
+    width: 45%;
+    float: left;
+    padding: 20px;
+    background-color: lightgreen;
+    font-size: 24px;
+    text-align: center;
+}
