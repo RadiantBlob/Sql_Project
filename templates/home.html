@@ -14,49 +14,20 @@
 				<input type="number" id="number" name="Number" autocomplete="off" min="0" max="801">
 
 				<br/>
+				<div id="filter_checkboxes">
 
-				<label for="id">ID</label>
-				<input type="checkbox" id="id" name="ID" checked="true">
+					{% for arg_name, arg_val in checkboxes.items() %}
+					<div class="checkbox">
+						<label for={{arg_name}}>{{arg_name}}</label>
+						{% if arg_val == 1 %}
+							<input type="checkbox" id={{arg_name}} name={{arg_name}} checked>
+						{% else %}
+							<input type="checkbox" id={{arg_name}} name={{arg_name}}>
+						{% endif %}
+					</div>
+					{% endfor %}
 
-				<label for="name">Name</label>
-				<input type="checkbox" id="name" name="Name" checked="true">
-
-				<label for="type1">Type 1</label>
-				<input type="checkbox" id="type1" name="type1" checked="true">
-
-				<label for="type2">Type 2</label>
-				<input type="checkbox" id="type2" name="type2" checked="true">
-
-				<label for="generation">Generation</label>
-				<input type="checkbox" id="generation" name="Generation" checked="true">
-
-				<label for="abilities">Abilities</label>
-				<input type="checkbox" id="abilities" name="Abilities" checked="true">
-
-				<label for="hp">HP</label>
-				<input type="checkbox" id="hp" name="hp" checked="true">
-
-				<label for="speed">Speed</label>
-				<input type="checkbox" id="speed" name="speed" checked="true">
-
-				<label for="attack">Attack</label>
-				<input type="checkbox" id="attack" name="attack" checked="true">
-
-				<label for="defense">Defense</label>
-				<input type="checkbox" id="defense" name="defense" checked="true">
-
-				<label for="classification">Classification</label>
-				<input type="checkbox" id="classification" name="classification" checked="true">
-
-				<label for="height">Height</label>
-				<input type="checkbox" id="height" name="height" checked="true">
-
-				<label for="weight">Weight</label>
-				<input type="checkbox" id="weight" name="weight" checked="true">
-
-				<label for="legendary">Legendary</label>
-				<input type="checkbox" id="legendary" name="legendary" checked="true">
-
+				</div>
 				<br/>
 
 				<button id="Button1">Search</button>
