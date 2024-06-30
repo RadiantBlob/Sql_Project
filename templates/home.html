@@ -8,6 +8,11 @@
 
 	</head>
 	<body>
+	{% if login != True %}
+	<a href="/u/login" class="login">Sign in</a>
+	<a href="/u/add" class="login">Sign up</a>
+	{% else %}
+	{% endif %}
 		<div class="container">
 			<form action="" method="post">
 				<label for="number">Pokedex_number</label>
