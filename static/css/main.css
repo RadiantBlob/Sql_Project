@@ -91,7 +91,12 @@ a {
     background-color: lightgreen;
     font-size: 24px;
     text-align: center;
+}
 
+.checkbox {
+	display: inline-block;
+	border: 1px solid black;
+	border-radius: 5px;
 }
 
 .login{
