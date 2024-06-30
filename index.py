@@ -13,6 +13,7 @@ def index():
                         'attack', 'defense', 'classification', 'height', 'weight', 'legendary']
 
     pokemon_list = return_all(f=argument_filter)
+    dict_arg_val = dict(zip(filter_arguments, argument_filter)) 
 
     if request.method == 'POST':
         number = request.form.get('Number')
