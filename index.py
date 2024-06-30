@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect
-
+from flask import Flask, render_template, request, redirect, url_for
 from backend import Pokemon, return_all, return_filter
 from user import User
 
@@ -42,12 +41,26 @@ def add(id: int):
     return show_pokemon(id)
 
 
-@app.route("/u/<string:username>")
-def user(username: str):
+@app.route("/u/<string:username>", methods=['GET', 'POST'])
+def user(username: str, login=False):
     u = User.from_db(username)
+    if request.method == 'GET':
+        login = request.args.get('login')
+    if request.method == 'POST' and request.form.get('name') is not None:
+        pokemon_name = request.form.get('name')
+        pokemon_level = request.form.get('level')
+        User.move_to_inventory(pokemon_name, pokemon_level, u)
+        return render_template("user.html", user=u, login=True)
+    elif request.method == 'POST':
+        pokemon_name = request.form.get('name1')
+        pokemon_level = request.form.get('level1')
+        User.move_to_team(pokemon_name, pokemon_level, u)
+        return render_template("user.html", user=u, login=True)
     if u is None:
         return "Not a valid username"
-    return render_template("user.html", user=u)
+    if login:
+        return render_template("user.html", user=u, login=True)
+    return render_template("user.html", user=u, login=False)
 
 
 @app.route("/u/add", methods=['GET', 'POST'])
@@ -58,9 +71,28 @@ def add_user():
         u = User.from_db(username)
         if u is None:
             User.to_db(username, password)
-            return redirect("/u/{username}".format(username=username))
+            return redirect(url_for('user', username=username, login=True))
+
         else:
             return "Username is already used"
+    return render_template("add_user.html")
+
+
+@app.route("/u/login", methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('Username')
+        password = request.form.get('Password')
+        u = User.from_db(username)
+        p = User.password(password)
+        if u is None:
+            return "Please create an user"
+        elif p is None:
+            return 'Your password is wrong'
+        elif str(p) != str(u):
+            return 'Your password is wrong'
+        else:
+            return redirect(url_for('user', username=username, login=True))
     return render_template("add_user.html")
 
 

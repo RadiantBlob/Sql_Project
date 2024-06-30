@@ -1,4 +1,6 @@
 import sqlite3
+
+import user
 from backend import Pokemon
 from util.utilities import read_one, read_all, write_all
 
@@ -18,6 +20,13 @@ class User:
     @classmethod
     def from_db(cls, un: str):
         row = read_one("poke.db", f"SELECT * FROM User WHERE username = '{un}'")
+        if row is None:
+            return
+        return cls(*row)
+
+    @classmethod
+    def password(cls, pw: str):
+        row = read_one("poke.db", f"SELECT * FROM User WHERE password = '{pw}'")
         if row is None:
             return
         return cls(*row)
@@ -73,17 +82,19 @@ class User:
         self.inventory = []
         self.load_pokemon()
 
-    def move_to_team(self, pokemon, level):
+    @classmethod
+    def move_to_team(cls, pokemon, level, username):
         sql = (f"UPDATE User_hat_Pokemon SET inteam = 1 WHERE id = (SELECT id FROM User_hat_Pokemon WHERE pokemon ="
-               f"'{pokemon}' AND level = '{level}' limit 1)")
+               f"'{pokemon}' AND level = '{level}' AND inteam = 0 limit 1)")
         write_all("poke.db", sql)
-        self.load_pokemon()
+        cls.load_pokemon(username)
 
-    def move_to_inventory(self, pokemon, level):
+    @classmethod
+    def move_to_inventory(cls, pokemon, level, username):
         sql = (f"UPDATE User_hat_Pokemon SET inteam = 0 WHERE id = (SELECT id FROM User_hat_Pokemon WHERE pokemon = "
-               f"'{pokemon}' AND level = '{level}' LIMIT 1)")
+               f"'{pokemon}' AND level = '{level}' AND inteam = 1 LIMIT 1)")
         write_all("poke.db", sql)
-        self.load_pokemon()
+        cls.load_pokemon(username)
 
     def __str__(self):
         return f"{self.username}"
@@ -96,7 +107,8 @@ if __name__ == '__main__':
     # admin.write_pokemon(135)
     # print(admin.inventory)
     # admin.delete_pokemon(135, 1)
-    admin.move_to_inventory(4, 2)
-    admin.update_database()
+    User.move_to_inventory(473, 6, admin)
+    #admin.update_database()
     print("inventory = ", admin.inventory)
     print("team = ",admin.team)
+

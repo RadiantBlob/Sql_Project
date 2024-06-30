@@ -6,6 +6,12 @@
 	<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='pika_s.png')}}">
 </head>
 <body>
+{% if login != True %}
+	<a href="/u/login" class="login">Sign in</a>
+	<a href="/u/add" class="login">Sign up</a>
+{% else %}
+	<p style="float:right; text-align:center;">logged in as <br/> {{user.username}}</p>
+{% endif %}
 <h1>{{user.username}}</h1>
 <h2>team</h2>
 <div id="team" class="p_list">
@@ -15,6 +21,14 @@
 		<p>{{pokemon.name}}</p>
 		<p>level: {{level}}</p>
 	</a>
+	{% if login == True %}
+	<form action="" method="POST">
+		<input type="text" id="name" name="name" hidden value="{{pokemon.id}}">
+		<input type="text" id="level" name="level" hidden value="{{level}}">
+        <button type="submit" id="Button1">Move to inventory</button>
+    </form>
+	{% else %}
+	{% endif %}
 	{% endfor %}
 </div>
 <h2>inventory</h2>
@@ -25,8 +39,21 @@
 		<p>{{pokemon.name}}</p>
 		<p>level: {{level}}</p>
 	</a>
+	{% if login == True %}
+	<form action="" method="POST">
+		<input type="text" id="name1" name="name1" hidden value="{{pokemon.id}}">
+		<input type="text" id="level1" name="level1" hidden value="{{level}}">
+        <button type="submit" id="Button2">Move to team</button>
+    </form>
+	{% else %}
+	{% endif %}
 	{% endfor %}
 </div>
+
+{% if login == True %}
+	<p>Sucessfully loged in</p>
+{% else %}
+{% endif %}
 
 </body>
 </html>

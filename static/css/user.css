@@ -14,4 +14,9 @@ a {
 	text-decoration: underline;
 }
 
+.login{
+    float: right;
+    width: 5%;
+}
+
 

@@ -93,3 +93,8 @@ a {
     text-align: center;
 
 }
+
+.login{
+    float: right;
+    width: 5%;
+}
