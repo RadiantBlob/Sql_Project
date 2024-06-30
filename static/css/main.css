@@ -5,6 +5,15 @@ table {
 	font-size: 24px;
 }
 
+label{
+   width: 100%;
+   padding: 12px;
+   border-radius: 4px;
+   box-sizing: border-box;
+   margin-top: 6px;
+   margin-bottom: 10px;
+}
+
 th, td {
 	padding: 6px;
 	text-align: left;
@@ -68,4 +77,19 @@ a {
 
 .gen7 {
 	background-color: hsla(calc(6 * 255/7), 100%, 50%, 0.2)
+}
+
+.Pokemon_stats{
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+.Pokemon_stats_child{
+    width: 45%;
+    float: left;
+    padding: 20px;
+    background-color: lightgreen;
+    font-size: 24px;
+    text-align: center;
+
 }

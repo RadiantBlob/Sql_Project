@@ -10,6 +10,24 @@
 <img src="{{url_for('static', filename=('sprites/{}.png').format(p.id))}}" style="height:600px">
 <h1>{{p.name}}</h1>
 
+<div class="Pokemon_stats">
+	<div class="Pokemon_stats_child">
+		<p>ID: {{p.id}}</p>
+		<p>HP: {{p.hp}}</p>
+		<p>Speed: {{p.speed}}</p>
+		<p>Attack: {{p.attack}}</p>
+	</div>
+
+	<div class="Pokemon_stats_child">
+		<p>Defense: {{p.defense}}</p>
+		<p>Height: {{p.height}} m</p>
+		<p>Weight: {{p.weight}} kg</p>
+		<p>Type1: {{p.type1}}</p>
+	</div>
+
+</div>
+
+
 <div class="nav">
 	<a href="/pokemon/{{p.id - 1 if p.id > 1 else 1}}" class="hide">back</a>
 	<a href="/" class="hide">home</a>
