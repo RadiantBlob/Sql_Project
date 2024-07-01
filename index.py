@@ -103,7 +103,7 @@ def login():
             return 'Your password is wrong'
         else:
             return redirect(url_for('user', username=username, login=True))
-    return render_template("add_user.html")
+    return render_template("login_user.html")
 
 
 if __name__ == '__main__':
