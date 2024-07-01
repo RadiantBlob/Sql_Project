@@ -56,10 +56,15 @@ def user(username: str, login=False):
         pokemon_level = request.form.get('level')
         User.move_to_inventory(pokemon_name, pokemon_level, u)
         return render_template("user.html", user=u, login=True)
-    elif request.method == 'POST':
+    elif request.method == 'POST' and request.form.get('name1') is not None:
         pokemon_name = request.form.get('name1')
         pokemon_level = request.form.get('level1')
         User.move_to_team(pokemon_name, pokemon_level, u)
+        return render_template("user.html", user=u, login=True)
+    elif request.method == 'POST':
+        pokemon_id = request.form.get('pokemon_id')
+        pokemon_level = request.form.get('pokemon_level')
+        User.add_pokemon(pokemon_id, pokemon_level, u)
         return render_template("user.html", user=u, login=True)
     if u is None:
         return "Not a valid username"

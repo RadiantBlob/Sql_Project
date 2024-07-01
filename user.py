@@ -96,6 +96,10 @@ class User:
         write_all("poke.db", sql)
         cls.load_pokemon(username)
 
+    @classmethod
+    def add_pokemon(cls, pokemon_id, level, username):
+        cls.write_pokemon(username, pokemon_id, level)
+
     def __str__(self):
         return f"{self.username}"
 

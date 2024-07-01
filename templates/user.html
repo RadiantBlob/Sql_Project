@@ -51,7 +51,12 @@
 </div>
 
 {% if login == True %}
-	<p>Sucessfully loged in</p>
+	<form action="" method="POST">
+		<input type="number" id="pokemon_id" name="pokemon_id" placeholder="input ID" min="0" max="801">
+		<input type="number" id="pokemon_level" name="pokemon_level" placeholder="Input Level" min="1" max="100">
+		<button type="submit" id="Button3">Add pokemon</button>
+	</form>
+
 {% else %}
 {% endif %}
 
