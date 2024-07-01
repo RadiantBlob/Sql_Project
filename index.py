@@ -32,6 +32,7 @@ def index():
     return render_template("home.html",
                            lable=pokemon_list[0].get_keys(),
                            entries=[pokemon.get_values() for pokemon in pokemon_list],
+                           pokemon_list=pokemon_list,
                            checkboxes=dict_arg_val)
 
 

@@ -47,12 +47,14 @@
 			</tr>
 
 			{% for pokemon in entries %}
+			{% set outer_index = loop.index0 %}
 
-			<tr class="gen{{pokemon[4]}}">
+			<!-- <tr class="gen{{pokemon_list[outer_index].generation}}"> -->
+			<tr class="gen{{pokemon_list[outer_index].generation}}">
 				{% for value in pokemon%}
-				<td class="gen{{pokemon[4]}}">
+				<td class="gen{{pokemon_list[outer_index].generation}}">
 					{% if value == pokemon[1] %}
-					<a href="/pokemon/{{pokemon[0]}}" style="">
+					<a href="/pokemon/{{pokemon[0]}}">
 						{{value}}
 					</a>
 					{% else %}
