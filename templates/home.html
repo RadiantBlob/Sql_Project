@@ -36,6 +36,7 @@
 		<br/>
 
 		<button id="Button1">Search</button>
+		<a href="/">Reset</a>
 	</form>
 </div>
 
@@ -53,7 +54,7 @@
 			<tr class="gen{{pokemon_list[outer_index].generation}}">
 				{% for value in pokemon%}
 				<td class="gen{{pokemon_list[outer_index].generation}}">
-					{% if value == pokemon[1] %}
+					{% if value == pokemon_list[outer_index].name %}
 					<a href="/pokemon/{{pokemon[0]}}">
 						{{value}}
 					</a>
