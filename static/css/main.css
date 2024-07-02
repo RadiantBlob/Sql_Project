@@ -1,3 +1,7 @@
+body {
+	background-image: url(../bg.jpg)
+}
+
 table {
 	border-collapse: collapse;
 	position: relative;
